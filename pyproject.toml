@@ -1,0 +1,35 @@
+[project]
+name = "vcam"
+version = "0.1.0"
+description = "Virtual camera with background replacement (Robust Video Matting / BackgroundMattingV2) for Linux v4l2loopback"
+requires-python = ">=3.12,<3.13"
+license = "MIT"
+dependencies = [
+    "torch>=2.8,<2.9",
+    "torchvision>=0.23,<0.24",
+    "opencv-python>=4.10",
+    "numpy>=2.1",
+    "pyvirtualcam>=0.12",
+    "nvidia-ml-py>=13.615.71",
+]
+
+[project.scripts]
+vcam = "vcam.cli:main"
+
+[project.optional-dependencies]
+eval = [
+    "transformers>=5.22.1",
+]
+
+[tool.uv.sources]
+torch = { index = "pytorch-cu128" }
+torchvision = { index = "pytorch-cu128" }
+
+[[tool.uv.index]]
+name = "pytorch-cu128"
+url = "https://download.pytorch.org/whl/cu128"
+explicit = true
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
